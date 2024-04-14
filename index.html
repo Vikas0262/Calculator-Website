@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "poppins", sans-serif;
+            /* background: linear-gradient(to right, #667eea, #764ba2); */
+        }
+        .navbar{
+            /* background-color:#141C27; */
+           background: linear-gradient(to right, #667eea, #764ba2);
+            text-align: center; 
+            padding: 14px;
+        }
+        .navbar h1{
+            font-size: 2rem;
+            color: #fff;
+            font-weight: 600;
+        }
+        .conatiner {
+            width: 100%;
+            height: calc(100vh - 15px);
+            background: linear-gradient(to right, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .calculator {
+            /* background-color: #000428; */
+            background: #141C27;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: -50px;
+        }
+
+        .calculator form input {
+            /* padding-right: 15px; */
+            outline: 0;
+            width: 55px;
+            height: 45px;
+            border: none;
+    outline: none;
+    padding: 15px;
+    border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            font-size: 20px;
+            color: #fff;
+            cursor: pointer;
+            margin: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        form .display {
+            display: flex;
+            justify-content: flex-end;
+            margin: 20px 0;
+        }
+
+        form .display input {
+            text-align: right;
+            flex: 1;
+            font-size: 30px;
+            box-shadow: none;
+            border: none;
+        }
+
+        form input.equalto {
+            width: 145px;
+        }
+
+        form input.operator {
+            color: #33ffd8;
+        }
+
+        /* Media Queries */
+        @media only screen and (max-width: 600px) {
+            .calculator form input {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            form .display input {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar"><h1>Calculator</h1></header>
+    <div class="conatiner">
+        <div class="calculator">
+            <form id="calculatorForm">
+                <div class="display">
+                    <input id="display" type="text" name="display" />
+                </div>
+                <div>
+                    <input class="operator" type="button" value="AC" onclick="clearDisplay()" />
+                    <input class="operator" type="button" value="DE" onclick="deleteLastEntry()" />
+                    <input class="operator" type="button" value="." onclick="appendCharacter('.')" />
+                    <input class="operator" type="button" value="/" onclick="appendCharacter('/')" />
+                </div>
+                <div>
+                    <input type="button" value="7" onclick="appendCharacter('7')" />
+                    <input type="button" value="8" onclick="appendCharacter('8')" />
+                    <input type="button" value="9" onclick="appendCharacter('9')" />
+                    <input class="operator" type="button" value="*" onclick="appendCharacter('*')" />
+                </div>
+                <div>
+                    <input type="button" value="4" onclick="appendCharacter('4')" />
+                    <input type="button" value="5" onclick="appendCharacter('5')" />
+                    <input type="button" value="6" onclick="appendCharacter('6')" />
+                    <input class="operator" type="button" value="-" onclick="appendCharacter('-')" />
+                </div>
+                <div>
+                    <input type="button" value="1" onclick="appendCharacter('1')" />
+                    <input type="button" value="2" onclick="appendCharacter('2')" />
+                    <input type="button" value="3" onclick="appendCharacter('3')" />
+                    <input class="operator" type="button" value="+" onclick="appendCharacter('+')" />
+                </div>
+                <div>
+                    <input type="button" value="00" onclick="appendCharacter('00')" />
+                    <input type="button" value="0" onclick="appendCharacter('0')" />
+                    <input type="button" value="=" class="equalto operator" onclick="calculateResult()" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const display = document.getElementById('display');
+
+        function clearDisplay() {
+            display.value = '';
+        }
+
+        function deleteLastEntry() {
+            display.value = display.value.toString().slice(0, -1);
+        }
+
+        function appendCharacter(char) {
+            display.value += char;
+        }
+
+        function calculateResult() {
+            try {
+                display.value = eval(display.value);
+            } catch (error) {
+                display.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
